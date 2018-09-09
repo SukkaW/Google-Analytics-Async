@@ -1,5 +1,4 @@
 <?php
-    $tid='';  //Your Google Analytics tid here,like UA-XXXX-Y
     $check_referer_domain=false;
     $domain='example.com';  //If you open the domain check set your domain here
     
@@ -29,15 +28,19 @@
     if (!isset($_COOKIE["uuid"])) {
         $uuid=create_uuid();
         setcookie("uuid", $uuid , time()+368400000);
-    }else{
+    } else {
         $uuid=$_COOKIE["uuid"];
     }
     if (function_exists("fastcgi_finish_request")) {
         fastcgi_finish_request();
     }
-    
+
+    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+        $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+
     $url='v=1&t=pageview&';
-    $url.='tid='.$tid.'&';
+    $url.='tid='.rawurlencode(rawurldecode($_GET['tid'])).'&';
     $url.='cid='.$uuid.'&';
     $url.='dl='.rawurlencode(rawurldecode($_SERVER['HTTP_REFERER'])).'&';
     $url.='uip='.rawurlencode(rawurldecode($_SERVER['REMOTE_ADDR'])).'&';
@@ -55,5 +58,5 @@
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_exec($ch);
     curl_close($ch);
-    
+
 ?>

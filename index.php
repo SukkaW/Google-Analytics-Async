@@ -48,6 +48,7 @@
     $url.='uip='.rawurlencode(rawurldecode($_SERVER['REMOTE_ADDR'])).'&';
     $url.='ua='.rawurlencode(rawurldecode($_SERVER['HTTP_USER_AGENT'])).'&';
     $url.='dt='.rawurlencode(rawurldecode($_GET['dt'])).'&';
+    $url.='de='.rawurlencode(rawurldecode($_GET['de'])).'&';
     $url.='dr='.rawurlencode(rawurldecode($_GET['dr'])).'&';
     $url.='ul='.rawurlencode(rawurldecode($_GET['ul'])).'&';
     $url.='sd='.rawurlencode(rawurldecode($_GET['sd'])).'&';

@@ -1,5 +1,4 @@
 <?php
-    header("status: 204");
     header("cache-control: no-cache, no-store, must-revalidate");
     $check_referer_domain=false;
     $domain='example.com';  //If you open the domain check set your domain here

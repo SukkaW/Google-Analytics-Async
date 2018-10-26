@@ -37,6 +37,13 @@
         fastcgi_finish_request();
     }
 
+    ob_start();
+    header("Connection: close"); 
+    header('Content-Encoding: none');
+    header('Content-Length: 0');
+    ob_end_flush();
+    flush();
+
     if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
         $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
     }
